@@ -25,7 +25,7 @@ plaques_chi = [file4(:,2) ; file5(:,2) ; file6(:,2)]';
 % plaques_chi = (plaques_chi.*1000000)';
 
 % sham
-file7 = xlsread('Data\SHAM 12.18.21 ABM S11 full LHf plaque analysis.csv');
+file7 = xlsread('Data\SHAM 12.18.21 ABM S11 full LH plaque analysis.csv');
 file8 = xlsread('Data\Sham_M2_S3_LH_fulltif.tif Plaque Analysis.csv');
 file9 = xlsread('Data\Sham_M3_LH_ROItif.tif Plaque Analysis.csv');
 plaques_sham = [file7(:,2) ; file8(:,2) ; file9(:,2)]';

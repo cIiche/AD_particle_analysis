@@ -21,7 +21,7 @@ plaques_chi = [file4(:,2) ; file5(:,2) ; file6(:,2)]';
 % plaques_chi = (plaques_chi.*1000000)';
 
 % sham
-file7 = xlsread('Data\SHAM 12.18.21 ABM S11 full LHf plaque analysis.csv');
+file7 = xlsread('Data\SHAM 12.18.21 ABM S11 full LH plaque analysis.csv');
 file8 = xlsread('Data\Sham_M2_S3_LH_fulltif.tif Plaque Analysis.csv');
 file9 = xlsread('Data\Sham_M3_LH_ROItif.tif Plaque Analysis.csv');
 plaques_sham = [file7(:,2) ; file8(:,2) ; file9(:,2)]';
@@ -41,26 +41,40 @@ shamm1 = file7(:,2);
 shamm2 = file8(:,2); 
 shamm3 = file9(:,2); 
  
-threshold = input("What is the threshold value?: ") ;
+
 % operation = string(input("What is the operation? (ie. 'greater than', 'less than', 'greater than or equal to' etc.): ")) ;
+threshold = input("What is the threshold value?: ") ;
 % get_filtered_xcel(plaques_bob, plaques_chi, plaques_sham, threshold, operation);
 
+% upper theshold 
 % hardcoded for 7_12_22 assignment 
-bobm1 = bobm1(bobm1 <= threshold) ;
-bobm2 = bobm2(bobm2 <= threshold) ;
-bobm3 = bobm3(bobm3 <= threshold) ;
+% bobm1 = bobm1(bobm1 <= threshold) ;
+% bobm2 = bobm2(bobm2 <= threshold) ;
+% bobm3 = bobm3(bobm3 <= threshold) ;
+% 
+% chim1 = chim1(chim1 <= threshold) ;
+% chim2 = chim2(chim2 <= threshold) ;
+% chim3 = chim3(chim3 <= threshold) ;
+% 
+% shamm1 = shamm1(shamm1 <= threshold) ;
+% shamm2 = shamm2(shamm2 <= threshold) ;
+% shamm3 = shamm3(shamm3 <= threshold) ;
+% % lower threshold 
+bobm1 = bobm1(bobm1 >= 6000) ;
+bobm2 = bobm2(bobm2 >= 6000) ;
+bobm3 = bobm3(bobm3 >= 6000) ;
 
-chim1 = chim1(chim1 <= threshold) ;
-chim2 = chim2(chim2 <= threshold) ;
-chim3 = chim3(chim3 <= threshold) ;
+chim1 = chim1(chim1 >= 6000) ;
+chim2 = chim2(chim2 >= 6000) ;
+chim3 = chim3(chim3 >= 6000) ;
 
-shamm1 = shamm1(shamm1 <= threshold) ;
-shamm2 = shamm2(shamm2 <= threshold) ;
-shamm3 = shamm3(shamm3 <= threshold) ;
+shamm1 = shamm1(shamm1 >= 6000) ;
+shamm2 = shamm2(shamm2 >= 6000) ;
+shamm3 = shamm3(shamm3 >= 6000) ;
 
 %% producing xcel sheet 
 
-    filename = 'Left Hemisphere Particle Analysis by mouse less than or equal to ' + string(threshold) + 'um.xlsx';
+    filename = 'Left Hemisphere Particle Analysis by mouse greater than or equal to ' + string(threshold) + 'um.xlsx';
     writematrix(bobm1,filename,'Sheet','Bobola m1','Range','A2');
     writematrix(bobm2,filename,'Sheet','Bobola m2','Range','A2');
     writematrix(bobm3,filename,'Sheet','Bobola m3','Range','A2');
