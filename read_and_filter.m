@@ -25,7 +25,27 @@ file7 = xlsread('Data\SHAM 12.18.21 ABM S11 full LH plaque analysis.csv');
 file8 = xlsread('Data\Sham_M2_S3_LH_fulltif.tif Plaque Analysis.csv');
 file9 = xlsread('Data\Sham_M3_LH_ROItif.tif Plaque Analysis.csv');
 plaques_sham = [file7(:,2) ; file8(:,2) ; file9(:,2)]';
-% sham_plaques = (sham_plaques.*1000000)'; % already in um^2 in sheet
+
+% % B1 Series data 
+% file1 = xlsread('Data\Series_B1\Series_B1 ROI LH Bob 11.12.21 ABM S12 tif.tif Plaque Analysis.csv');
+% file2 = xlsread('Data\Series_B1\Series_B1 ROI LH Bob_12.10.21_ABM1_S6 tif.tif Plaque Analysis.csv');
+% file3 = xlsread('Data\Series_B1\Series_B1 ROI LH bob_12.18.21_ABM_S6 tif.tif Plaque Analysis.csv');
+% plaques_bob = [file1(:,2) ; file2(:,2) ; file3(:,2)]';
+% % plaques_bob = (plaques_bob.*1000000)';
+% 
+% % chikodi 
+% file4 = xlsread('Data\Series_B1\Series_B1 ROI LH Chi 11.11.21 ABM_S11.tif Plaque Analysis.csv');
+% file5 = xlsread('Data\Series_B1\Series_B1 ROI LH Chi 12.03.21 ABM_S12 tif.tif Plaque Analysis.csv');
+% file6 = xlsread('Data\Series_B1\Series_B1 ROI LH Chi 12.09.21 ABM S12 tif.tif Plaque Analysis.csv');
+% plaques_chi = [file4(:,2) ; file5(:,2) ; file6(:,2)]';
+% % plaques_chi = (plaques_chi.*1000000)';
+% 
+% % sham
+% file7 = xlsread('Data\Series_B1\Series_B1 ROI LH SHAM 12.18.21 ABM S12 tif.tif Plaque Analysis.csv');
+% file8 = xlsread('Data\Series_B1\Series_B1 ROI LH Sham m2 ABM S6 tif.tif Plaque Analysis.csv');
+% file9 = xlsread('Data\Series_B1\Series_B1 ROI LH sham m3 ABM S3 tif.tif Plaque Analysis.csv');
+% plaques_sham = [file7(:,2) ; file8(:,2) ; file9(:,2)]';
+
 
 %% filtering plaques to different sizes 
 
@@ -47,34 +67,33 @@ threshold = input("What is the threshold value?: ") ;
 % get_filtered_xcel(plaques_bob, plaques_chi, plaques_sham, threshold, operation);
 
 % upper theshold 
-% hardcoded for 7_12_22 assignment 
-% bobm1 = bobm1(bobm1 <= threshold) ;
-% bobm2 = bobm2(bobm2 <= threshold) ;
-% bobm3 = bobm3(bobm3 <= threshold) ;
-% 
-% chim1 = chim1(chim1 <= threshold) ;
-% chim2 = chim2(chim2 <= threshold) ;
-% chim3 = chim3(chim3 <= threshold) ;
-% 
-% shamm1 = shamm1(shamm1 <= threshold) ;
-% shamm2 = shamm2(shamm2 <= threshold) ;
-% shamm3 = shamm3(shamm3 <= threshold) ;
+bobm1 = bobm1(bobm1 <= threshold) ;
+bobm2 = bobm2(bobm2 <= threshold) ;
+bobm3 = bobm3(bobm3 <= threshold) ;
+
+chim1 = chim1(chim1 <= threshold) ;
+chim2 = chim2(chim2 <= threshold) ;
+chim3 = chim3(chim3 <= threshold) ;
+
+shamm1 = shamm1(shamm1 <= threshold) ;
+shamm2 = shamm2(shamm2 <= threshold) ;
+shamm3 = shamm3(shamm3 <= threshold) ;
 % % lower threshold 
-bobm1 = bobm1(bobm1 >= 6000) ;
-bobm2 = bobm2(bobm2 >= 6000) ;
-bobm3 = bobm3(bobm3 >= 6000) ;
+bobm1 = bobm1(bobm1 >= 200) ;
+bobm2 = bobm2(bobm2 >= 200) ;
+bobm3 = bobm3(bobm3 >= 200) ;
 
-chim1 = chim1(chim1 >= 6000) ;
-chim2 = chim2(chim2 >= 6000) ;
-chim3 = chim3(chim3 >= 6000) ;
+chim1 = chim1(chim1 >= 200) ;
+chim2 = chim2(chim2 >= 200) ;
+chim3 = chim3(chim3 >= 200) ;
 
-shamm1 = shamm1(shamm1 >= 6000) ;
-shamm2 = shamm2(shamm2 >= 6000) ;
-shamm3 = shamm3(shamm3 >= 6000) ;
+shamm1 = shamm1(shamm1 >= 200) ;
+shamm2 = shamm2(shamm2 >= 200) ;
+shamm3 = shamm3(shamm3 >= 200) ;
 
 %% producing xcel sheet 
 
-    filename = 'Left Hemisphere Particle Analysis by mouse greater than or equal to ' + string(threshold) + 'um.xlsx';
+    filename = 'Series_B1 LH Particle Analysis by mouse greater than or equal to' + string(threshold) + 'um.xlsx';
     writematrix(bobm1,filename,'Sheet','Bobola m1','Range','A2');
     writematrix(bobm2,filename,'Sheet','Bobola m2','Range','A2');
     writematrix(bobm3,filename,'Sheet','Bobola m3','Range','A2');
