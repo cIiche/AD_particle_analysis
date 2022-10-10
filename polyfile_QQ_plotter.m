@@ -8,72 +8,113 @@ clear all
 %% creating new xcel sheet decision
 decision = input("Would you like to create a consolidated excel file for the AB plaques by US protocol? ('1'=yes, '0'=no): ") ;
 decision2 = input("Would you like to create a second sheet of filtered values? ('1'=yes, '0'=no): ") ;
+whatdata = input("Run series A ('1'), series B ('2'), or 'FULL_' data('3')?: ") ;
 %% reading xcel data 
 
-% bobola 
-file1 = xlsread('Data\Bob_11_12_21.tif Plaque Analysis.csv');
-file2 = xlsread('Data\Bob_12_10_21_LH_ROI.tif Plaque Analysis.csv');
-file3 = xlsread('Data\Bob_12_18_LH.tif Plaque Analysis.csv');
-plaques_bob = [file1(:,2) ; file2(:,2) ; file3(:,2)]';
-% plaques_bob = (plaques_bob.*1000000)';
+if whatdata == 3 
+    % FULL series chikodi data 
+    file1 = xlsread('Data\FULL\FULL_Chik_M1_AB_ROI_1_ch00.tiff AB results table.csv');
+    file2 = xlsread('Data\FULL\FULL_Chik_M1_AB_ROI_2_ch00.tiff AB results table.csv');
+    file3 = xlsread('Data\FULL\FULL_Chik_M2_AB_ROI_1_ch00.tiff AB results table.csv');
+    file4 = xlsread('Data\FULL\FULL_Chik_M2_AB_ROI_2_ch00.tiff AB results table.csv');
+    file5 = xlsread('Data\FULL\FULL_Chik_M3_AB_ROI_1_ch00.tiff AB results table.csv');
+    file6 = xlsread('Data\FULL\FULL_Chik_M3_AB_ROI_2_ch00.tiff AB results table.csv');
+    plaques_chi = [file1(:,3) ; file2(:,3) ; file3(:,3); file4(:,3) ; file5(:,3) ; file6(:,3)]';
 
-% chikodi 
-file4 = xlsread('Data\Chi_11_11_21_fullLH-1.tif plaque analysis.csv');
-file5 = xlsread('Data\Chi_12_03_21_LH_ROI.tif Plaque Analysis.csv');
-file6 = xlsread('Data\Chi_12_09_21_LH.tif Plaque Analysis.csv');
-plaques_chi = [file4(:,2) ; file5(:,2) ; file6(:,2)]';
-% plaques_chi = (plaques_chi.*1000000)';
+    % FULL series SHAM data 
+    file7 = xlsread('Data\FULL\FULL_Sham_M1_AB_ROI_1_ch00.tiff AB results table.csv');
+    file8 = xlsread('Data\FULL\FULL_Sham_M1_AB_ROI_2_ch00.tiff AB results table.csv');
+    file9 = xlsread('Data\FULL\FULL_Sham_M2_AB_ROI_1 _ch00.tiff AB results table.csv');
+    file10 = xlsread('Data\FULL\FULL_Sham_M2_AB_ROI_2_ch00.tiff AB results table.csv');
+    file11 = xlsread('Data\FULL\FULL_Sham_M3_AB_ROI_1_ch00.tiff AB results table.csv');
+    file12 = xlsread('Data\FULL\FULL_Sham_M3_AB_ROI_2_ch00.tiff AB results table.csv');
+    plaques_sham = [file7(:,3) ; file8(:,3) ; file9(:,3); file10(:,3) ; file11(:,3) ; file12(:,3)]';
+else
+    % bobola 
+    file1 = xlsread('Data\Bob_11_12_21.tif Plaque Analysis.csv');
+    file2 = xlsread('Data\Bob_12_10_21_LH_ROI.tif Plaque Analysis.csv');
+    file3 = xlsread('Data\Bob_12_18_LH.tif Plaque Analysis.csv');
+    plaques_bob = [file1(:,2) ; file2(:,2) ; file3(:,2)]';
+    % plaques_bob = (plaques_bob.*1000000)';
 
-% sham
-file7 = xlsread('Data\SHAM 12.18.21 ABM S11 full LH plaque analysis.csv');
-file8 = xlsread('Data\Sham_M2_S3_LH_fulltif.tif Plaque Analysis.csv');
-file9 = xlsread('Data\Sham_M3_LH_ROItif.tif Plaque Analysis.csv');
-plaques_sham = [file7(:,2) ; file8(:,2) ; file9(:,2)]';
-% sham_plaques = (sham_plaques.*1000000)'; % already in um^2 in sheet
+    % chikodi 
+    file4 = xlsread('Data\Chi_11_11_21_fullLH-1.tif plaque analysis.csv');
+    file5 = xlsread('Data\Chi_12_03_21_LH_ROI.tif Plaque Analysis.csv');
+    file6 = xlsread('Data\Chi_12_09_21_LH.tif Plaque Analysis.csv');
+    plaques_chi = [file4(:,2) ; file5(:,2) ; file6(:,2)]';
+    % plaques_chi = (plaques_chi.*1000000)';
+
+    % sham
+    file7 = xlsread('Data\SHAM 12.18.21 ABM S11 full LH plaque analysis.csv');
+    file8 = xlsread('Data\Sham_M2_S3_LH_fulltif.tif Plaque Analysis.csv');
+    file9 = xlsread('Data\Sham_M3_LH_ROItif.tif Plaque Analysis.csv');
+    plaques_sham = [file7(:,2) ; file8(:,2) ; file9(:,2)]';
+    % sham_plaques = (sham_plaques.*1000000)'; % already in um^2 in sheet
+end 
 
 %% QQ plots 
 
-% chikodi vs. sham 
-figure(1)
-chi_vs_sham = qqplot(plaques_chi,plaques_sham) ;
-        title('QQ plot of chi vs sham')
-        xlabel('Quantiles of Chikodi data')
-        ylabel('Quantiles of sham data')
-        hold on 
-        plot(0:100:16000, 0:100:16000) 
-% 
-% Bobola vs. sham 
-figure(2)
-bob_vs_sham = qqplot(plaques_bob,plaques_sham) ;
-        title('QQ plot of bob vs sham')
-        xlabel('Quantiles of bobola data')
-        ylabel('Quantiles of sham data')
-        hold on 
-        plot(0:100:16000, 0:100:16000) 
-%         
-% % Bobola vs. chikodi 
-figure(3)
-bob_vs_chi = qqplot(plaques_bob,plaques_chi) ;
-        title('QQ plot of bob vs chi')
-        xlabel('Quantiles of bobola data')
-        ylabel('Quantiles of chikodi data')
-        hold on 
-        plot(0:100:16000, 0:100:16000) 
-        
+if whatdata ~= 3 
+    % chikodi vs. sham 
+    figure(1)
+    chi_vs_sham = qqplot(plaques_chi,plaques_sham) ;
+            title('QQ plot of chi vs sham')
+            xlabel('Quantiles of Chikodi data')
+            ylabel('Quantiles of sham data')
+            hold on 
+            plot(0:100:16000, 0:100:16000) 
+    % 
+    % Bobola vs. sham 
+    figure(2)
+    bob_vs_sham = qqplot(plaques_bob,plaques_sham) ;
+            title('QQ plot of bob vs sham')
+            xlabel('Quantiles of bobola data')
+            ylabel('Quantiles of sham data')
+            hold on 
+            plot(0:100:16000, 0:100:16000) 
+    %         
+    % % Bobola vs. chikodi 
+    figure(3)
+    bob_vs_chi = qqplot(plaques_bob,plaques_chi) ;
+            title('QQ plot of bob vs chi')
+            xlabel('Quantiles of bobola data')
+            ylabel('Quantiles of chikodi data')
+            hold on 
+            plot(0:100:16000, 0:100:16000) 
+else 
+    % chikodi vs. sham 
+    figure(1)
+    chi_vs_sham = qqplot(plaques_chi,plaques_sham) ;
+            title('QQ plot of chi vs sham')
+            xlabel('Quantiles of Chikodi data')
+            ylabel('Quantiles of sham data')
+            hold on 
+            plot(0:100:16000, 0:100:16000) 
+end 
 
 %% Mann Whitneys 
 
-MW_chi_vs_sham = ranksum(plaques_chi,plaques_sham);
-MW_bob_vs_sham = ranksum(plaques_bob,plaques_sham);
-MW_bob_vs_chi = ranksum(plaques_bob,plaques_chi);
+if whatdata ~= 3 
+    MW_chi_vs_sham = ranksum(plaques_chi,plaques_sham);
+    MW_bob_vs_sham = ranksum(plaques_bob,plaques_sham);
+    MW_bob_vs_chi = ranksum(plaques_bob,plaques_chi);
 
-median_bob = median(plaques_bob);
-median_chi = median(plaques_chi);
-median_sham = median(plaques_sham);
+    median_bob = median(plaques_bob);
+    median_chi = median(plaques_chi);
+    median_sham = median(plaques_sham);
 
-mean_bob = mean(plaques_bob);
-mean_chi = mean(plaques_chi);
-mean_sham = mean(plaques_sham);
+    mean_bob = mean(plaques_bob);
+    mean_chi = mean(plaques_chi);
+    mean_sham = mean(plaques_sham);
+else 
+    MW_chi_vs_sham = ranksum(plaques_chi,plaques_sham);
+    
+    median_chi = median(plaques_chi);
+    median_sham = median(plaques_sham);
+    
+    mean_chi = mean(plaques_chi);
+    mean_sham = mean(plaques_sham);
+end 
 
 %% exporting data to xcel sheet 
 if decision == 1 

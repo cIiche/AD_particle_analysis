@@ -10,161 +10,155 @@
 
 function [filtered_bobm1,filtered_bobm2,filtered_bobm3,filtered_chim1,filtered_chim2,filtered_chim3,filtered_shamm1,filtered_shamm2,filtered_shamm3] = get_filtered_xcel(bobm1, bobm2, bobm3, chim1, chim2, chim3, shamm1, shamm2, shamm3, x, x2, operation)
 if operation == 1
-    filtered_bobm1 = bobm1(bobm1 > x) ;
-    filtered_bobm2 = bobm2(bobm2 > x) ;
-    filtered_bobm3 = bobm3(bobm3 > x) ;
-
-    filtered_chim1 = chim1(chim1 > x) ;
-    filtered_chim2 = chim2(chim2 > x) ;
-    filtered_chim3 = chim3(chim3 > x) ;
-
-    filtered_shamm1 = shamm1(shamm1 > x) ;
-    filtered_shamm2 = shamm2(shamm2 > x) ;
-    filtered_shamm3 = shamm3(shamm3 > x) ;
+    
+%     for i = 1:length(bobm1) 
+%         if bobm1(i, 1) > x 
+%             bobm1(i,:) = [] ;
+%         end 
+%     end 
+%     filtered_bobm1 = bobm1 ;
+    
+    index = bobm1(:,1) <= x; bobm1(index, :) = []; filtered_bobm1 = bobm1 ;
+    index = bobm2(:,1) <= x; bobm2(index, :) = []; filtered_bobm2 = bobm2 ;   
+    index = bobm3(:,1) <= x; bobm3(index, :) = []; filtered_bobm3 = bobm3 ; 
+    index = chim1(:,1) <= x; chim1(index, :) = []; filtered_chim1 = chim1 ;
+    index = chim2(:,1) <= x; chim2(index, :) = []; filtered_chim2 = chim2 ;
+    index = chim3(:,1) <= x; chim3(index, :) = []; filtered_chim3 = chim3 ; 
+    index = shamm1(:,1) <= x; shamm1(index, :) = []; filtered_shamm1 = shamm1 ; 
+    index = shamm2(:,1) <= x; shamm2(index, :) = []; filtered_shamm2 = shamm2 ; 
+    index = shamm3(:,1) <= x; shamm3(index, :) = []; filtered_shamm3 = shamm3 ; 
     
 elseif operation == 2
-    filtered_bobm1 = bobm1(bobm1 < x) ;
-    filtered_bobm2 = bobm2(bobm2 < x) ;
-    filtered_bobm3 = bobm3(bobm3 < x) ;
-
-    filtered_chim1 = chim1(chim1 < x) ;
-    filtered_chim2 = chim2(chim2 < x) ;
-    filtered_chim3 = chim3(chim3 < x) ;
-
-    filtered_shamm1 = shamm1(shamm1 < x) ;
-    filtered_shamm2 = shamm2(shamm2 < x) ;
-    filtered_shamm3 = shamm3(shamm3 < x) ;
+    index = bobm1(:,1) >= x; bobm1(index, :) = []; filtered_bobm1 = bobm1 ;
+    index = bobm2(:,1) >= x; bobm2(index, :) = []; filtered_bobm2 = bobm2 ;   
+    index = bobm3(:,1) >= x; bobm3(index, :) = []; filtered_bobm3 = bobm3 ; 
+    index = chim1(:,1) >= x; chim1(index, :) = []; filtered_chim1 = chim1 ;
+    index = chim2(:,1) >= x; chim2(index, :) = []; filtered_chim2 = chim2 ;
+    index = chim3(:,1) >= x; chim3(index, :) = []; filtered_chim3 = chim3 ; 
+    index = shamm1(:,1) >= x; shamm1(index, :) = []; filtered_shamm1 = shamm1 ; 
+    index = shamm2(:,1) >= x; shamm2(index, :) = []; filtered_shamm2 = shamm2 ; 
+    index = shamm3(:,1) >= x; shamm3(index, :) = []; filtered_shamm3 = shamm3 ; 
     
 elseif operation == 3
-    filtered_bobm1 = bobm1(bobm1 >= x) ;
-    filtered_bobm2 = bobm2(bobm2 >= x) ;
-    filtered_bobm3 = bobm3(bobm3 >= x) ;
-
-    filtered_chim1 = chim1(chim1 >= x) ;
-    filtered_chim2 = chim2(chim2 >= x) ;
-    filtered_chim3 = chim3(chim3 >= x) ;
-
-    filtered_shamm1 = shamm1(shamm1 >= x) ;
-    filtered_shamm2 = shamm2(shamm2 >= x) ;
-    filtered_shamm3 = shamm3(shamm3 >= x) ;
+    index = bobm1(:,1) < x; bobm1(index, :) = []; filtered_bobm1 = bobm1 ;
+    index = bobm2(:,1) < x; bobm2(index, :) = []; filtered_bobm2 = bobm2 ;   
+    index = bobm3(:,1) < x; bobm3(index, :) = []; filtered_bobm3 = bobm3 ; 
+    index = chim1(:,1) < x; chim1(index, :) = []; filtered_chim1 = chim1 ;
+    index = chim2(:,1) < x; chim2(index, :) = []; filtered_chim2 = chim2 ;
+    index = chim3(:,1) < x; chim3(index, :) = []; filtered_chim3 = chim3 ; 
+    index = shamm1(:,1) < x; shamm1(index, :) = []; filtered_shamm1 = shamm1 ; 
+    index = shamm2(:,1) < x; shamm2(index, :) = []; filtered_shamm2 = shamm2 ; 
+    index = shamm3(:,1) < x; shamm3(index, :) = []; filtered_shamm3 = shamm3 ; 
     
 elseif operation == 4
-    filtered_bobm1 = bobm1(bobm1 <= x) ;
-    filtered_bobm2 = bobm2(bobm2 <= x) ;
-    filtered_bobm3 = bobm3(bobm3 <= x) ;
+    index = bobm1(:,1) > x; bobm1(index, :) = []; filtered_bobm1 = bobm1 ;
+    index = bobm2(:,1) > x; bobm2(index, :) = []; filtered_bobm2 = bobm2 ;   
+    index = bobm3(:,1) > x; bobm3(index, :) = []; filtered_bobm3 = bobm3 ; 
+    index = chim1(:,1) > x; chim1(index, :) = []; filtered_chim1 = chim1 ;
+    index = chim2(:,1) > x; chim2(index, :) = []; filtered_chim2 = chim2 ;
+    index = chim3(:,1) > x; chim3(index, :) = []; filtered_chim3 = chim3 ; 
+    index = shamm1(:,1) > x; shamm1(index, :) = []; filtered_shamm1 = shamm1 ; 
+    index = shamm2(:,1) > x; shamm2(index, :) = []; filtered_shamm2 = shamm2 ; 
+    index = shamm3(:,1) > x; shamm3(index, :) = []; filtered_shamm3 = shamm3 ; 
+end 
 
-    filtered_chim1 = chim1(chim1 <= x) ;
-    filtered_chim2 = chim2(chim2 <= x) ;
-    filtered_chim3 = chim3(chim3 <= x) ;
-
-    filtered_shamm1 = shamm1(shamm1 <= x) ;
-    filtered_shamm2 = shamm2(shamm2 <= x) ;
-    filtered_shamm3 = shamm3(shamm3 <= x) ;
-elseif operation == 5 
+if operation == 5 
     x1 = x ;
     operation1 = input("what operation with x1? ('1' = '>x', '2' = '<x', '3' = '>=x', '4' = '<=x'): ") ;
     operation2 = input("what operation with x2? ('1' = '>x', '2' = '<x', '3' = '>=x', '4' = '<=x'): ") ; 
     if operation1 == 1 
-        bobm1 = bobm1(bobm1 > x1) ;
-        bobm2 = bobm2(bobm2 > x1) ;
-        bobm3 = bobm3(bobm3 > x1) ;
+        index = bobm1(:,1) <= x1; bobm1(index, :) = []; 
+        index = bobm2(:,1) <= x1; bobm2(index, :) = [];   
+        index = bobm3(:,1) <= x1; bobm3(index, :) = []; 
+        index = chim1(:,1) <= x1; chim1(index, :) = []; 
+        index = chim2(:,1) <= x1; chim2(index, :) = []; 
+        index = chim3(:,1) <= x1; chim3(index, :) = []; 
+        index = shamm1(:,1) <= x1; shamm1(index, :) = [];  
+        index = shamm2(:,1) <= x1; shamm2(index, :) = [];  
+        index = shamm3(:,1) <= x1; shamm3(index, :) = []; 
 
-        chim1 = chim1(chim1 > x1) ;
-        chim2 = chim2(chim2 > x1) ;
-        chim3 = chim3(chim3 > x1) ;
-
-        shamm1 = shamm1(shamm1 > x1) ;
-        shamm2 = shamm2(shamm2 > x1) ;
-        shamm3 = shamm3(shamm3 > x1) ;
     elseif operation1 == 2
-        bobm1 = bobm1(bobm1 < x1) ;
-        bobm2 = bobm2(bobm2 < x1) ;
-        bobm3 = bobm3(bobm3 < x1) ;
-
-        chim1 = chim1(chim1 < x1) ;
-        chim2 = chim2(chim2 < x1) ;
-        chim3 = chim3(chim3 < x1) ;
-
-        shamm1 = shamm1(shamm1 < x1) ;
-        shamm2 = shamm2(shamm2 < x1) ;
-        shamm3 = shamm3(shamm3 < x1) ;
+        index = bobm1(:,1) >= x1; bobm1(index, :) = [];
+        index = bobm2(:,1) >= x1; bobm2(index, :) = [];  
+        index = bobm3(:,1) >= x1; bobm3(index, :) = []; 
+        index = chim1(:,1) >= x1; chim1(index, :) = []; 
+        index = chim2(:,1) >= x1; chim2(index, :) = [];
+        index = chim3(:,1) >= x1; chim3(index, :) = []; 
+        index = shamm1(:,1) >= x1; shamm1(index, :) = [];
+        index = shamm2(:,1) >= x1; shamm2(index, :) = [];
+        index = shamm3(:,1) >= x1; shamm3(index, :) = []; 
+        
     elseif operation1 == 3
-        bobm1 = bobm1(bobm1 >= x1) ;
-        bobm2 = bobm2(bobm2 >= x1) ;
-        bobm3 = bobm3(bobm3 >= x1) ;
-
-        chim1 = chim1(chim1 >= x1) ;
-        chim2 = chim2(chim2 >= x1) ;
-        chim3 = chim3(chim3 >= x1) ;
-
-        shamm1 = shamm1(shamm1 >= x1) ;
-        shamm2 = shamm2(shamm2 >= x1) ;
-        shamm3 = shamm3(shamm3 >= x1) ;
+         index = bobm1(:,1) < x1; bobm1(index, :) = []; 
+        index = bobm2(:,1) < x1; bobm2(index, :) = []; 
+        index = bobm3(:,1) < x1; bobm3(index, :) = []; 
+        index = chim1(:,1) < x1; chim1(index, :) = []; 
+        index = chim2(:,1) < x1; chim2(index, :) = []; 
+        index = chim3(:,1) < x1; chim3(index, :) = []; 
+        index = shamm1(:,1) < x1; shamm1(index, :) = []; 
+        index = shamm2(:,1) < x1; shamm2(index, :) = []; 
+        index = shamm3(:,1) < x1; shamm3(index, :) = []; 
     
     elseif operation1 == 4
-        bobm1 = bobm1(bobm1 <= x1) ;
-        bobm2 = bobm2(bobm2 <= x1) ;
-        bobm3 = bobm3(bobm3 <= x1) ;
-
-        chim1 = chim1(chim1 <= x1) ;
-        chim2 = chim2(chim2 <= x1) ;
-        chim3 = chim3(chim3 <= x1) ;
-
-        shamm1 = shamm1(shamm1 <= x1) ;
-        shamm2 = shamm2(shamm2 <= x1) ;
-        shamm3 = shamm3(shamm3 <= x1) ;
+        index = bobm1(:,1) > x1; bobm1(index, :) = [];
+        index = bobm2(:,1) > x1; bobm2(index, :) = []; 
+        index = bobm3(:,1) > x1; bobm3(index, :) = []; 
+        index = chim1(:,1) > x1; chim1(index, :) = []; 
+        index = chim2(:,1) > x1; chim2(index, :) = []; 
+        index = chim3(:,1) > x1; chim3(index, :) = []; 
+        index = shamm1(:,1) > x1; shamm1(index, :) = [];
+        index = shamm2(:,1) > x1; shamm2(index, :) = []; 
+        index = shamm3(:,1) > x1; shamm3(index, :) = [];
     end 
+    
     if operation2 == 1
-        filtered_bobm1 = bobm1(bobm1 > x2) ;
-        filtered_bobm2 = bobm2(bobm2 > x2) ;
-        filtered_bobm3 = bobm3(bobm3 > x2) ;
-
-        filtered_chim1 = chim1(chim1 > x2) ;
-        filtered_chim2 = chim2(chim2 > x2) ;
-        filtered_chim3 = chim3(chim3 > x2) ;
-
-        filtered_shamm1 = shamm1(shamm1 > x2) ;
-        filtered_shamm2 = shamm2(shamm2 > x2) ;
-        filtered_shamm3 = shamm3(shamm3 > x2) ;
+        index = bobm1(:,1) <= x2; bobm1(index, :) = []; filtered_bobm1 = bobm1 ;
+        index = bobm2(:,1) <= x2; bobm2(index, :) = []; filtered_bobm2 = bobm2 ;   
+        index = bobm3(:,1) <= x2; bobm3(index, :) = []; filtered_bobm3 = bobm3 ; 
+        index = chim1(:,1) <= x2; chim1(index, :) = []; filtered_chim1 = chim1 ;
+        index = chim2(:,1) <= x2; chim2(index, :) = []; filtered_chim2 = chim2 ;
+        index = chim3(:,1) <= x2; chim3(index, :) = []; filtered_chim3 = chim3 ; 
+        index = shamm1(:,1) <= x2; shamm1(index, :) = []; filtered_shamm1 = shamm1 ; 
+        index = shamm2(:,1) <= x2; shamm2(index, :) = []; filtered_shamm2 = shamm2 ; 
+        index = shamm3(:,1) <= x2; shamm3(index, :) = []; filtered_shamm3 = shamm3 ; 
+        
     elseif operation2 == 2
-        filtered_bobm1 = bobm1(bobm1 < x2) ;
-        filtered_bobm2 = bobm2(bobm2 < x2) ;
-        filtered_bobm3 = bobm3(bobm3 < x2) ;
-
-        filtered_chim1 = chim1(chim1 < x2) ;
-        filtered_chim2 = chim2(chim2 < x2) ;
-        filtered_chim3 = chim3(chim3 < x2) ;
-
-        filtered_shamm1 = shamm1(shamm1 < x2) ;
-        filtered_shamm2 = shamm2(shamm2 < x2) ;
-        filtered_shamm3 = shamm3(shamm3 < x2) ;
+        
+        index = bobm1(:,1) >= x2; bobm1(index, :) = []; filtered_bobm1 = bobm1 ;
+        index = bobm2(:,1) >= x2; bobm2(index, :) = []; filtered_bobm2 = bobm2 ;   
+        index = bobm3(:,1) >= x2; bobm3(index, :) = []; filtered_bobm3 = bobm3 ; 
+        index = chim1(:,1) >= x2; chim1(index, :) = []; filtered_chim1 = chim1 ;
+        index = chim2(:,1) >= x2; chim2(index, :) = []; filtered_chim2 = chim2 ;
+        index = chim3(:,1) >= x2; chim3(index, :) = []; filtered_chim3 = chim3 ; 
+        index = shamm1(:,1) >= x2; shamm1(index, :) = []; filtered_shamm1 = shamm1 ; 
+        index = shamm2(:,1) >= x2; shamm2(index, :) = []; filtered_shamm2 = shamm2 ; 
+        index = shamm3(:,1) >= x2; shamm3(index, :) = []; filtered_shamm3 = shamm3 ;
+        
     elseif operation2 == 3
-        filtered_bobm1 = bobm1(bobm1 >= x2) ;
-        filtered_bobm2 = bobm2(bobm2 >= x2) ;
-        filtered_bobm3 = bobm3(bobm3 >= x2) ;
-
-        filtered_chim1 = chim1(chim1 >= x2) ;
-        filtered_chim2 = chim2(chim2 >= x2) ;
-        filtered_chim3 = chim3(chim3 >= x2) ;
-
-        filtered_shamm1 = shamm1(shamm1 >= x2) ;
-        filtered_shamm2 = shamm2(shamm2 >= x2) ;
-        filtered_shamm3 = shamm3(shamm3 >= x2) ;
+       
+        index = bobm1(:,1) < x2; bobm1(index, :) = []; filtered_bobm1 = bobm1 ;
+        index = bobm2(:,1) < x2; bobm2(index, :) = []; filtered_bobm2 = bobm2 ;   
+        index = bobm3(:,1) < x2; bobm3(index, :) = []; filtered_bobm3 = bobm3 ; 
+        index = chim1(:,1) < x2; chim1(index, :) = []; filtered_chim1 = chim1 ;
+        index = chim2(:,1) < x2; chim2(index, :) = []; filtered_chim2 = chim2 ;
+        index = chim3(:,1) < x2; chim3(index, :) = []; filtered_chim3 = chim3 ; 
+        index = shamm1(:,1) < x2; shamm1(index, :) = []; filtered_shamm1 = shamm1 ; 
+        index = shamm2(:,1) < x2; shamm2(index, :) = []; filtered_shamm2 = shamm2 ; 
+        index = shamm3(:,1) < x2; shamm3(index, :) = []; filtered_shamm3 = shamm3 ; 
     
     elseif operation2 == 4
-        filtered_bobm1 = bobm1(bobm1 <= x2) ;
-        filtered_bobm2 = bobm2(bobm2 <= x2) ;
-        filtered_bobm3 = bobm3(bobm3 <= x2) ;
-
-        filtered_chim1 = chim1(chim1 <= x2) ;
-        filtered_chim2 = chim2(chim2 <= x2) ;
-        filtered_chim3 = chim3(chim3 <= x2) ;
-
-        filtered_shamm1 = shamm1(shamm1 <= x2) ;
-        filtered_shamm2 = shamm2(shamm2 <= x2) ;
-        filtered_shamm3 = shamm3(shamm3 <= x2) ;
-    end 
-    
+        
+        index = bobm1(:,1) > x2; bobm1(index, :) = []; filtered_bobm1 = bobm1 ;
+        index = bobm2(:,1) > x2; bobm2(index, :) = []; filtered_bobm2 = bobm2 ;   
+        index = bobm3(:,1) > x2; bobm3(index, :) = []; filtered_bobm3 = bobm3 ; 
+        index = chim1(:,1) > x2; chim1(index, :) = []; filtered_chim1 = chim1 ;
+        index = chim2(:,1) > x2; chim2(index, :) = []; filtered_chim2 = chim2 ;
+        index = chim3(:,1) > x2; chim3(index, :) = []; filtered_chim3 = chim3 ; 
+        index = shamm1(:,1) > x2; shamm1(index, :) = []; filtered_shamm1 = shamm1 ; 
+        index = shamm2(:,1) > x2; shamm2(index, :) = []; filtered_shamm2 = shamm2 ; 
+        index = shamm3(:,1) > x2; shamm3(index, :) = []; filtered_shamm3 = shamm3 ; 
+    end   
+end
 % filtered_median_bob = median(filtered_plaques_bob);
 % filtered_median_chi = median(filtered_plaques_chi);
 % filtered_median_sham = median(filtered_plaques_sham);
