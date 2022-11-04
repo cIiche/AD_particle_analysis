@@ -1,4 +1,4 @@
-% Authors: Alissa P., Henry T.
+ % Authors: Alissa P., Henry T.
 % this script reads histology data from AD excel spreadsheets and
 % (1) filters based on plaque size (2) produces new xcel sheet with pages for each mouse(not cohort)
 % CRITERIA
