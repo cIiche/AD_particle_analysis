@@ -7,7 +7,7 @@ clear all
 
 %% creating new xcel sheet decision
 decision = input("Would you like to create a consolidated excel file for the AB plaques by US protocol? ('1'=yes, '0'=no): ") ;
-decision2 = input("Would you like to create a second sheet of filtered values? ('1'=yes, '0'=no): ") ;
+decision2 =  input("Would you like to create a second sheet of filtered values? ('1'=yes, '0'=no): ") ;
 whatdata = input("Run series A ('1'), series B ('2'), or 'FULL_' data('3')?: ") ;
 %% reading xcel data 
 
@@ -29,25 +29,25 @@ if whatdata == 3
     file11 = xlsread('Data\FULL\FULL_Sham_M3_AB_ROI_1_ch00.tiff AB results table.csv');
     file12 = xlsread('Data\FULL\FULL_Sham_M3_AB_ROI_2_ch00.tiff AB results table.csv');
     plaques_sham = [file7(:,3) ; file8(:,3) ; file9(:,3); file10(:,3) ; file11(:,3) ; file12(:,3)]';
-else
+elseif whatdata == 1
     % bobola 
-    file1 = xlsread('Data\Bob_11_12_21.tif Plaque Analysis.csv');
-    file2 = xlsread('Data\Bob_12_10_21_LH_ROI.tif Plaque Analysis.csv');
-    file3 = xlsread('Data\Bob_12_18_LH.tif Plaque Analysis.csv');
+    file1 = xlsread('Data\Series_A\Bob_11_12_21 ABM Slice 11 LH ROI.tif Plaque Analysis.csv');
+    file2 = xlsread('Data\Series_A\Bob_12_10_21_ABM_S5 LH_ROI.tif Plaque Analysis.csv');
+    file3 = xlsread('Data\Series_A\Bob_12_18_21_ABM_S5 probably LH ROI.tif Plaque Analysis.csv');
     plaques_bob = [file1(:,2) ; file2(:,2) ; file3(:,2)]';
     % plaques_bob = (plaques_bob.*1000000)';
 
     % chikodi 
-    file4 = xlsread('Data\Chi_11_11_21_fullLH-1.tif plaque analysis.csv');
-    file5 = xlsread('Data\Chi_12_03_21_LH_ROI.tif Plaque Analysis.csv');
-    file6 = xlsread('Data\Chi_12_09_21_LH.tif Plaque Analysis.csv');
+    file4 = xlsread('Data\Series_A\Chi_11_11_21_ABM_S5 LH ROI.tif Plaque Analysis.csv');
+    file5 = xlsread('Data\Series_A\Chi_12_03_21 ABM_S5 LH_ROI.tif Plaque Analysis.csv');
+    file6 = xlsread('Data\Series_A\Chi_12_09_21 ABM_S5 LH ROI.tif Plaque Analysis.csv');
     plaques_chi = [file4(:,2) ; file5(:,2) ; file6(:,2)]';
     % plaques_chi = (plaques_chi.*1000000)';
 
     % sham
-    file7 = xlsread('Data\SHAM 12.18.21 ABM S11 full LH plaque analysis.csv');
-    file8 = xlsread('Data\Sham_M2_S3_LH_fulltif.tif Plaque Analysis.csv');
-    file9 = xlsread('Data\Sham_M3_LH_ROItif.tif Plaque Analysis.csv');
+    file7 = xlsread('Data\Series_A\SHAM 12.18.21 ABM S11 full LHf.tif (RGB).tif Plaque Analysis.csv');
+    file8 = xlsread('Data\Series_A\Sham_M2_S3A_LH_fulltif.tif Plaque Analysis.csv');
+    file9 = xlsread('Data\Series_A\Sham_M3_S6A LH_ROItif.tif Plaque Analysis.csv');
     plaques_sham = [file7(:,2) ; file8(:,2) ; file9(:,2)]';
     % sham_plaques = (sham_plaques.*1000000)'; % already in um^2 in sheet
 end 

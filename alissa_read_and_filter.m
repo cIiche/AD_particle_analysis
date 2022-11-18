@@ -1,6 +1,7 @@
  % Authors: Alissa P., Henry T.
 % this script reads histology data from AD excel spreadsheets and
 % (1) filters based on plaque size (2) produces new xcel sheet with pages for each mouse(not cohort)
+% CAN run series_FULL 5 day chronic data plaque sheets 
 % CRITERIA
 % - excel sheets read should have plaque sizes in units of qm in column #2
 % - arrange 'data' folder in same folder as code, with series A data in

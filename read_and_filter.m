@@ -1,4 +1,5 @@
-% Authors: Alissa P., Henry T. 
+ % Authors: Alissa P., Henry T. 
+OUTDATED 11_15_22: can't run SERIES_FULL data and filter it; use alissa_read_and_filter 
 % this script reads histology data from AD excel spreadsheets and
 % (1) filters based on plaque size (2) produces new xcel sheet with pages for each mouse(not cohort)
 
@@ -61,21 +62,21 @@ elseif whatdata == 3
     series = 'FULL series' ;
     
     % FULL series chikodi data 
-    file1 = xlsread('Data\FULL\FULL_Chik_M1_AB_ROI_1_ch00.tiff AB results table.csv');
-    file2 = xlsread('Data\FULL\FULL_Chik_M1_AB_ROI_2_ch00.tiff AB results table.csv');
-    file3 = xlsread('Data\FULL\FULL_Chik_M2_AB_ROI_1_ch00.tiff AB results table.csv');
-    file4 = xlsread('Data\FULL\FULL_Chik_M2_AB_ROI_2_ch00.tiff AB results table.csv');
-    file5 = xlsread('Data\FULL\FULL_Chik_M3_AB_ROI_1_ch00.tiff AB results table.csv');
-    file6 = xlsread('Data\FULL\FULL_Chik_M3_AB_ROI_2_ch00.tiff AB results table.csv');
+    file1 = xlsread('Data\Series_FULL\FULL_Chik_M1_AB_ROI_1_ch00.tiff AB results table.csv');
+    file2 = xlsread('Data\Series_FULL\FULL_Chik_M1_AB_ROI_2_ch00.tiff AB results table.csv');
+    file3 = xlsread('Data\Series_FULL\FULL_Chik_M2_AB_ROI_1_ch00.tiff AB results table.csv');
+    file4 = xlsread('Data\Series_FULL\FULL_Chik_M2_AB_ROI_2_ch00.tiff AB results table.csv');
+    file5 = xlsread('Data\Series_FULL\FULL_Chik_M3_AB_ROI_1_ch00.tiff AB results table.csv');
+    file6 = xlsread('Data\Series_FULL\FULL_Chik_M3_AB_ROI_2_ch00.tiff AB results table.csv');
     plaques_chi = [file1(:,3) ; file2(:,3) ; file3(:,3); file4(:,3) ; file5(:,3) ; file6(:,3)]';
 
     % FULL series SHAM data 
-    file7 = xlsread('Data\FULL\FULL_Sham_M1_AB_ROI_1_ch00.tiff AB results table.csv');
-    file8 = xlsread('Data\FULL\FULL_Sham_M1_AB_ROI_2_ch00.tiff AB results table.csv');
-    file9 = xlsread('Data\FULL\FULL_Sham_M2_AB_ROI_1 _ch00.tiff AB results table.csv');
-    file10 = xlsread('Data\FULL\FULL_Sham_M2_AB_ROI_2_ch00.tiff AB results table.csv');
-    file11 = xlsread('Data\FULL\FULL_Sham_M3_AB_ROI_1_ch00.tiff AB results table.csv');
-    file12 = xlsread('Data\FULL\FULL_Sham_M3_AB_ROI_2_ch00.tiff AB results table.csv');
+    file7 = xlsread('Data\Series_FULL\FULL_Sham_M1_AB_ROI_1_ch00.tiff AB results table.csv');
+    file8 = xlsread('Data\Series_FULL\FULL_Sham_M1_AB_ROI_2_ch00.tiff AB results table.csv');
+    file9 = xlsread('Data\Series_FULL\FULL_Sham_M2_AB_ROI_1 _ch00.tiff AB results table.csv');
+    file10 = xlsread('Data\Series_FULL\FULL_Sham_M2_AB_ROI_2_ch00.tiff AB results table.csv');
+    file11 = xlsread('Data\Series_FULL\FULL_Sham_M3_AB_ROI_1_ch00.tiff AB results table.csv');
+    file12 = xlsread('Data\Series_FULL\FULL_Sham_M3_AB_ROI_2_ch00.tiff AB results table.csv');
     plaques_sham = [file7(:,3) ; file8(:,3) ; file9(:,3); file10(:,3) ; file11(:,3) ; file12(:,3)]';
 end
 
