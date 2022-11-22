@@ -54,20 +54,20 @@ elseif whatdata == 2
    
 elseif whatdata == 3 % FULL series data
     seriesdata= 'Series_FULL' ;
-    file1 = xlsread('Data\Series_FULL\FULL_Chik_M1_AB_ROI_1_ch00.tiff AB results table.csv');
-    file2 = xlsread('Data\Series_FULL\FULL_Chik_M1_AB_ROI_2_ch00.tiff AB results table.csv');
-    file3 = xlsread('Data\Series_FULL\FULL_Chik_M2_AB_ROI_1_ch00.tiff AB results table.csv');
-    file4 = xlsread('Data\Series_FULL\FULL_Chik_M2_AB_ROI_2_ch00.tiff AB results table.csv');
-    file5 = xlsread('Data\Series_FULL\FULL_Chik_M3_AB_ROI_1_ch00.tiff AB results table.csv');
-    file6 = xlsread('Data\Series_FULL\FULL_Chik_M3_AB_ROI_2_ch00.tiff AB results table.csv');
+    file1 = xlsread('Data\Series_FULL\FULL_Chik_M1_AB_ROI_1_ch00.tif AB results table.csv');
+    file2 = xlsread('Data\Series_FULL\FULL_Chik_M1_AB_ROI_2_ch00.tif AB results table.csv');
+    file3 = xlsread('Data\Series_FULL\FULL_Chik_M2_AB_ROI_1_ch00.tif AB results table.csv');
+    file4 = xlsread('Data\Series_FULL\FULL_Chik_M2_AB_ROI_2_ch00.tif AB results table.csv');
+    file5 = xlsread('Data\Series_FULL\FULL_Chik_M3_AB_ROI_1_ch00.tif-(Colour_2) AB results table.csv');
+    file6 = xlsread('Data\Series_FULL\FULL_Chik_M3_AB_ROI_2_ch00.tif AB results table.csv');
 %     plaques_chi = [file1(:,3) ; file2(:,3) ; file3(:,3); file4(:,3); file5(:,3), file6(:,3)]';
    
-    file7 = xlsread('Data\Series_FULL\FULL_Sham_M1_AB_ROI_1_ch00.tiff AB results table.csv');
-    file8 = xlsread('Data\Series_FULL\FULL_Sham_M1_AB_ROI_2_ch00.tiff AB results table.csv');
-    file9 = xlsread('Data\Series_FULL\FULL_Sham_M2_AB_ROI_1 _ch00.tiff AB results table.csv');
-    file10 = xlsread('Data\Series_FULL\FULL_Sham_M2_AB_ROI_2_ch00.tiff AB results table.csv');
-    file11 = xlsread('Data\Series_FULL\FULL_Sham_M3_AB_ROI_1_ch00.tiff AB results table.csv');
-    file12 = xlsread('Data\Series_FULL\FULL_Sham_M3_AB_ROI_2_ch00.tiff AB results table.csv');
+    file7 = xlsread('Data\Series_FULL\FULL_Sham_M1_AB_ROI_1_ch00.tif AB results table.csv');
+    file8 = xlsread('Data\Series_FULL\FULL_Sham_M1_AB_ROI_2_ch00.tif AB results table.csv');
+    file9 = xlsread('Data\Series_FULL\FULL_Sham_M2_AB_ROI_1 _ch00.tif AB results table.csv');
+    file10 = xlsread('Data\Series_FULL\FULL_Sham_M2_AB_ROI_2_ch00.tif AB results table.csv');
+    file11 = xlsread('Data\Series_FULL\FULL_Sham_M3_AB_ROI_1_ch00.tif AB results table.csv');
+    file12 = xlsread('Data\Series_FULL\FULL_Sham_M3_AB_ROI_2_ch00.tif AB results table.csv');
 %     plaques_sham = [file7(:,3) ; file8(:,3) ; file9(:,3); file10(:,3); file11(:,3), file12(:,3)]';
 end
 %% filtering plaques to different sizes
@@ -83,32 +83,43 @@ if whatdata == 3
 % be changed; read_and_filter_flexible is called by whatdata "3" input and
 % runs on loops based on the length and plaque entries in the protocol.mX
 % variables 
-
-    chi.m1 = file1(:,3);
-    chi.m2 = file2(:,3);
-    chi.m3 = file3(:,3);
-    chi.m4 = file4(:,3);
-    chi.m5 = file5(:,3);
-    chi.m6 = file6(:,3);
+    
+    chi.m1 = [file1(:,3) file1(:,9) file1(:,10)];
+    chi.m2 = [file2(:,3) file2(:,9) file2(:,10)];
+    chi.m3 = [file3(:,3) file3(:,9) file3(:,10)];
+    chi.m4 = [file4(:,3) file4(:,9) file4(:,10)];
+    chi.m5 = [file5(:,3) file5(:,9) file5(:,10)];
+    chi.m6 = [file6(:,3) file6(:,9) file6(:,10)];
     chi_mice = {'chim1' 'chim2' 'chim3' 'chim4' 'chim5' 'chim6'} ;
    
-    sham.m1 = file7(:,3);
-    sham.m2 = file8(:,3);
-    sham.m3 = file9(:,3);
-    sham.m4 = file10(:,3);
-    sham.m5 = file11(:,3);
-    sham.m6 = file12(:,3);
+    sham.m1 = [file7(:,3) file7(:,9) file7(:,10)];
+    sham.m2 = [file8(:,3) file8(:,9) file8(:,10)];
+    sham.m3 = [file9(:,3) file9(:,9) file9(:,10)];
+    sham.m4 = [file10(:,3) file10(:,9) file10(:,10)];
+    sham.m5 = [file11(:,3) file11(:,9) file11(:,10)];
+    sham.m6 = [file12(:,3) file12(:,9) file12(:,10)];
     sham_mice = {'shamm1' 'shamm2' 'shamm3' 'shamm4' 'shamm5' 'shamm6'} ;
 else
-    bobm1 = file1(:,2);
-    bobm2 = file2(:,2);
-    bobm3 = file3(:,2);
-    chim1 = file4(:,2);
-    chim2 = file5(:,2);
-    chim3 = file6(:,2);
-    shamm1 = file7(:,2);
-    shamm2 = file8(:,2);
-    shamm3 = file9(:,2);
+%     bobm1 = file1(:,2);
+%     bobm2 = file2(:,2);
+%     bobm3 = file3(:,2);
+%     chim1 = file4(:,2);
+%     chim2 = file5(:,2);
+%     chim3 = file6(:,2);
+%     shamm1 = file7(:,2);
+%     shamm2 = file8(:,2);
+%     shamm3 = file9(:,2);
+    bobm1 = [file1(:,2) file1(:,3) file1(:,4)]; % to preserve x and y coordinates of each plaque
+    bobm2 = [file2(:,2) file2(:,3) file2(:,4)]; 
+    bobm3 = [file3(:,2) file3(:,3) file3(:,4)];
+
+    chim1 = [file4(:,2) file4(:,3) file4(:,4)];
+    chim2 = [file5(:,2) file5(:,3) file5(:,4)]; 
+    chim3 = [file6(:,2) file6(:,3) file6(:,4)]; 
+
+    shamm1 = [file7(:,2) file7(:,3) file7(:,4)];
+    shamm2 = [file8(:,2) file8(:,3) file8(:,4)]; 
+    shamm3 = [file9(:,2) file9(:,3) file9(:,4)];
 end
 operation = input("What is the operation?" +newline+"(ie. '1' = '>x', '2' = '<x', '3' = '>=x', '4' = '<=x', '5' = upper and lower x, where 'x' = threshold value(s)): ") ;
 if operation ~= 5

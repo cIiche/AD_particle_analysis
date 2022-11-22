@@ -9,41 +9,41 @@ function [filtered_chi,filtered_sham] = get_filtered_flexible(chi_mice, sham_mic
 if operation == 1
     for i=1:length(chi_mice)
         concat1 = ['m' num2str(i)];
-        filtered_chi.(concat1) = chi.(concat1)(chi.(concat1) > x) ;
-    end
+        filtered_chi.(concat1)(:,1) = chi.(concat1)(chi.(concat1)(:,1) > x) ;
+    end % this is the only one that nearly works so far 
     for i=1:length(sham_mice)
         concat1 = ['m' num2str(i)];
-        filtered_sham.(concat1) = sham.(concat1)(sham.(concat1) > x) ;
+        filtered_sham.(concat1)(1) = sham.(concat1)(sham.(concat1)(1) > x) ;
     end
    
 elseif operation == 2
     for i=1:length(chi_mice)
         concat1 = ['m' num2str(i)];
-        filtered_chi.(concat1) = chi.(concat1)(chi.(concat1) < x) ;
+        filtered_chi.(concat1)(1) = chi.(concat1)(chi.(concat1)(1) < x) ;
     end
     for i=1:length(sham_mice)
         concat1 = ['m' num2str(i)];
-        filtered_sham.(concat1) = sham.(concat1)(sham.(concat1) < x) ;
+        filtered_sham.(concat1)(1) = sham.(concat1)(sham.(concat1)(1) < x) ;
     end
    
 elseif operation == 3
     for i=1:length(chi_mice)
         concat1 = ['m' num2str(i)];
-        filtered_chi.(concat1) = chi.(concat1)(chi.(concat1) >= x) ;
+        filtered_chi.(concat1)(1) = chi.(concat1)(chi.(concat1)(1) >= x) ;
     end
     for i=1:length(sham_mice)
         concat1 = ['m' num2str(i)];
-        filtered_sham.(concat1) = sham.(concat1)(sham.(concat1) >= x) ;
+        filtered_sham.(concat1)(1) = sham.(concat1)(sham.(concat1)(1) >= x) ;
     end
    
 elseif operation == 4
     for i=1:length(chi_mice)
         concat1 = ['m' num2str(i)];
-        filtered_chi.(concat1) = chi.(concat1)(chi.(concat1) <= x) ;
+        filtered_chi.(concat1)(1) = chi.(concat1)(chi.(concat1)(1) <= x) ;
     end
     for i=1:length(sham_mice)
         concat1 = ['m' num2str(i)];
-        filtered_sham.(concat1) = sham.(concat1)(sham.(concat1) <= x) ;
+        filtered_sham.(concat1)(1) = sham.(concat1)(sham.(concat1)(1) <= x) ;
     end
    
 elseif operation == 5
@@ -54,13 +54,13 @@ elseif operation == 5
     if operation1 == 1
         for i=1:length(chi_mice)
             concat1 = ['m' num2str(i)];
-            chi.(concat1) = chi.(concat1)(chi.(concat1) > x1) ;
+            chi.(concat1)(1) = chi.(concat1)(chi.(concat1)(1) > x1) ;
         end
         for i=1:length(sham_mice)
             concat1 = ['m' num2str(i)];
-            sham.(concat1) = sham.(concat1)(sham.(concat1) > x1) ;
+            sham.(concat1)(1) = sham.(concat1)(sham.(concat1)(1) > x1) ;
         end
-   
+   % keep adding ones from here
     elseif operation1 == 2
         for i=1:length(chi_mice)
             concat1 = ['m' num2str(i)];
