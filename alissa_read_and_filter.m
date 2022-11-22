@@ -1,4 +1,4 @@
- % Authors: Alissa P., Henry T.
+% Authors: Alissa P., Henry T.
 % this script reads histology data from AD excel spreadsheets and
 % (1) filters based on plaque size (2) produces new xcel sheet with pages for each mouse(not cohort)
 % CAN run series_FULL 5 day chronic data plaque sheets 
@@ -70,6 +70,38 @@ elseif whatdata == 3 % FULL series data
     file12 = xlsread('Data\Series_FULL\FULL_Sham_M3_AB_ROI_2_ch00.tif AB results table.csv');
 %     plaques_sham = [file7(:,3) ; file8(:,3) ; file9(:,3); file10(:,3); file11(:,3), file12(:,3)]';
 end
+
+%% boxplots 
+% x_label= {'HC';'SZ'};
+% toget=[K M];
+% grp=[zeros(1,21),ones(1,19)];
+% boxplot(toget,grp)
+% set(gca,'xticklabel',x_label)
+
+figure(1)
+    % ROI1 boxplot 
+%     boxplot([file1(:,1), file3(:,1), file5(:,1), file7(:,1), file9(:,1), file11(:,1)],'Notch','on','Labels', {'Chikodi m1 ROI1','Chikodi m2 ROI1', 'Chikodi m3 ROI1','Sham m1 ROI1', 'Sham m2 ROI1', 'Sham m3 ROI1'}) 
+%     hold on 
+%     title(filename,' ROI1') 
+%     ylabel('area (um^2)') 
+    
+    ROI1_xlab = {'Chikodi m1 ROI1';'Chikodi m2 ROI1'; 'Chikodi m3 ROI1';'Sham m1 ROI1'; 'Sham m2 ROI1'; 'Sham m3 ROI1'};
+    ROI1_y = [file1(:,1)' file3(:,1)' file5(:,1)' file7(:,1)' file9(:,1)' file11(:,1)'];
+    grp = [zeros(1,length(file1)),ones(1,length(file3)),2*ones(1,length(file5)),3*ones(1,length(file7)),4*ones(1,length(file9)),5*ones(1,length(file11))];
+    boxplot(ROI1_y, grp, 'Notch','on') 
+    title('ROI1') 
+    ylabel('area (um^2)') 
+    set(gca,'xticklabel',ROI1_xlab)
+
+figure(2)
+    ROI2_xlab = {'Chikodi m1 ROI2';'Chikodi m2 ROI2'; 'Chikodi m3 ROI2';'Sham m1 ROI2'; 'Sham m2 ROI2'; 'Sham m3 ROI2'};
+    ROI2_y = [file2(:,1)' file4(:,1)' file6(:,1)' file8(:,1)' file10(:,1)' file12(:,1)'];
+    grp = [zeros(1,length(file2)),ones(1,length(file4)),2*ones(1,length(file6)),3*ones(1,length(file8)),4*ones(1,length(file10)),5*ones(1,length(file12))];
+    boxplot(ROI2_y, grp, 'Notch','on') 
+    title('ROI2') 
+    ylabel('area (um^2)') 
+    set(gca,'xticklabel',ROI2_xlab) 
+    
 %% filtering plaques to different sizes
 if whatdata == 3
 %     mouse_total = input("How many chikodi mice are there?: ") ;
@@ -84,20 +116,20 @@ if whatdata == 3
 % runs on loops based on the length and plaque entries in the protocol.mX
 % variables 
     
-    chi.m1 = [file1(:,3) file1(:,9) file1(:,10)];
-    chi.m2 = [file2(:,3) file2(:,9) file2(:,10)];
-    chi.m3 = [file3(:,3) file3(:,9) file3(:,10)];
-    chi.m4 = [file4(:,3) file4(:,9) file4(:,10)];
-    chi.m5 = [file5(:,3) file5(:,9) file5(:,10)];
-    chi.m6 = [file6(:,3) file6(:,9) file6(:,10)];
+    chi.f1 = [file1(:,3) file1(:,9) file1(:,10)];
+    chi.f2 = [file2(:,3) file2(:,9) file2(:,10)];
+    chi.f3 = [file3(:,3) file3(:,9) file3(:,10)];
+    chi.f4 = [file4(:,3) file4(:,9) file4(:,10)];
+    chi.f5 = [file5(:,3) file5(:,9) file5(:,10)];
+    chi.f6 = [file6(:,3) file6(:,9) file6(:,10)];
     chi_mice = {'chim1' 'chim2' 'chim3' 'chim4' 'chim5' 'chim6'} ;
    
-    sham.m1 = [file7(:,3) file7(:,9) file7(:,10)];
-    sham.m2 = [file8(:,3) file8(:,9) file8(:,10)];
-    sham.m3 = [file9(:,3) file9(:,9) file9(:,10)];
-    sham.m4 = [file10(:,3) file10(:,9) file10(:,10)];
-    sham.m5 = [file11(:,3) file11(:,9) file11(:,10)];
-    sham.m6 = [file12(:,3) file12(:,9) file12(:,10)];
+    sham.f1 = [file7(:,3) file7(:,9) file7(:,10)];
+    sham.f2 = [file8(:,3) file8(:,9) file8(:,10)];
+    sham.f3 = [file9(:,3) file9(:,9) file9(:,10)];
+    sham.f4 = [file10(:,3) file10(:,9) file10(:,10)];
+    sham.f5 = [file11(:,3) file11(:,9) file11(:,10)];
+    sham.f6 = [file12(:,3) file12(:,9) file12(:,10)];
     sham_mice = {'shamm1' 'shamm2' 'shamm3' 'shamm4' 'shamm5' 'shamm6'} ;
 else
 %     bobm1 = file1(:,2);
@@ -138,8 +170,9 @@ elseif operation == 5
     else 
         [filtered_bobm1,filtered_bobm2,filtered_bobm3,filtered_chim1,filtered_chim2,filtered_chim3,filtered_shamm1,filtered_shamm2,filtered_shamm3] = get_filtered_xcel(bobm1, bobm2, bobm3, chim1, chim2, chim3, shamm1, shamm2, shamm3, x1, x2, operation);
     end 
-end
-%% producing xcel sheet
+end       
+    
+%% naming xcel sheet, producing sheet(1/2) 
 if operation ~= 5
     if operation == 1
         filename = string(seriesdata) + ' LH Particle Analysis greater than ' + string(x) + 'um.xlsx';
@@ -153,39 +186,112 @@ if operation ~= 5
 else
     filename = string(seriesdata) + ' LH Particle Analysis by mouse ' + string(x1) + '-' + string(x2) + 'um.xlsx';
 end
+
+%% MW for series_FULL data 
+if whatdata == 3 
+    % merging chi/sham m1-3 ROI1 and ROI2 plaque AREAS into 1 column for MW  
+    chi_ROI1 = [filtered_chi.f1(:,1); filtered_chi.f3(:,1); filtered_chi.f5(:,1)];     
+    chi_ROI2 = [filtered_chi.f2(:,1); filtered_chi.f4(:,1); filtered_chi.f6(:,1)];  
+    
+    sham_ROI1 = [filtered_sham.f1(:,1); filtered_sham.f3(:,1); filtered_sham.f5(:,1)];    
+    sham_ROI2 = [filtered_sham.f2(:,1); filtered_sham.f4(:,1); filtered_sham.f6(:,1)];  
+   
+    % making grouped data lengths even 
+    % ROI1 
+    if length(chi_ROI1) > length(sham_ROI1) % if chi_ROI1 is longer  
+        diff_length = length(chi_ROI1) - length(sham_ROI1) ; 
+        NaN_vector = NaN(1, diff_length); 
+        sham_ROI1 = [sham_ROI1; NaN_vector'];
+    else % if sham_ROI1 is longer 
+        diff_length = length(sham_ROI1) - length(chi_ROI1); 
+        NaN_vector = NaN(1, diff_length); 
+        chi_ROI1 = [chi_ROI1; NaN_vector'];
+    end 
+    % ROI 2    
+    if length(chi_ROI2) > length(sham_ROI2) % if chi_ROI1 is longer  
+        diff_length = length(chi_ROI2) - length(sham_ROI2) ; 
+        NaN_vector = NaN(1, diff_length); 
+        sham_ROI2 = [sham_ROI2; NaN_vector'];
+    else % if sham_ROI1 is longer 
+        diff_length = length(sham_ROI2) - length(chi_ROI2); 
+        NaN_vector = NaN(1, diff_length); 
+        chi_ROI2 = [chi_ROI2; NaN_vector'];
+    end 
+    
+    % MWs between equal length chi and sham ROI1 and ROI 2 
+        MW_ROI1 = ranksum(chi_ROI1, sham_ROI1); 
+        MW_ROI2 = ranksum(chi_ROI2, sham_ROI2);
+        
+ %% boxplots for series_FULL data 
+%     figure(1)
+%     % ROI1 boxplot 
+%     boxplot([chi_ROI1,sham_ROI1],'Notch','on','Labels', {'Chikodi m1-3 ROI1', 'Sham m1-3 ROI1'}) 
+%     hold on 
+%     title(filename,' ROI1') 
+%     ylabel('area (um^2)') 
+%     
+%     figure(2)
+%     % ROI1 boxplot 
+%     boxplot([chi_ROI2,sham_ROI2],'Notch','on','Labels', {'Chikodi m1-3 ROI1', 'Sham m1-3 ROI1'}) 
+%     hold on 
+%     title(filename,' ROI2') 
+%     ylabel('area (um^2)') 
+    
+end % from whatdata==3 
+
+%% writing xcel sheet, producing sheet(2/2) 
+
 if whatdata == 3 % data stored in structure versus variables
    
-    writematrix(filtered_chi.m1,filename,'Sheet','Chikodi m1','Range','A2');
-    writematrix(filtered_chi.m2,filename,'Sheet','Chikodi m2','Range','A2');
-    writematrix(filtered_chi.m3,filename,'Sheet','Chikodi m3','Range','A2');
-    writematrix(filtered_chi.m4,filename,'Sheet','Chikodi m4','Range','A2');
-    writematrix(filtered_chi.m5,filename,'Sheet','Chikodi m5','Range','A2');
-    writematrix(filtered_chi.m6,filename,'Sheet','Chikodi m6','Range','A2');
+    writematrix(filtered_chi.f1,filename,'Sheet','Chikodi m1 ROI 1','Range','A2');
+    writematrix(filtered_chi.f2,filename,'Sheet','Chikodi m1 ROI 2','Range','A2');
+    writematrix(filtered_chi.f3,filename,'Sheet','Chikodi m2 ROI 1','Range','A2');
+    writematrix(filtered_chi.f4,filename,'Sheet','Chikodi m2 ROI 2','Range','A2');
+    writematrix(filtered_chi.f5,filename,'Sheet','Chikodi m3 ROI 1','Range','A2');
+    writematrix(filtered_chi.f6,filename,'Sheet','Chikodi m3 ROI 2','Range','A2');
    
    
-    writematrix(filtered_sham.m1,filename,'Sheet','Sham m1','Range','A2');
-    writematrix(filtered_sham.m2,filename,'Sheet','Sham m2','Range','A2');
-    writematrix(filtered_sham.m3,filename,'Sheet','Sham m3','Range','A2');
-    writematrix(filtered_sham.m4,filename,'Sheet','Sham m4','Range','A2');
-    writematrix(filtered_sham.m5,filename,'Sheet','Sham m5','Range','A2');
-    writematrix(filtered_sham.m6,filename,'Sheet','Sham m6','Range','A2');
+    writematrix(filtered_sham.f1,filename,'Sheet','Sham m1 ROI 1','Range','A2');
+    writematrix(filtered_sham.f2,filename,'Sheet','Sham m1 ROI 2','Range','A2');
+    writematrix(filtered_sham.f3,filename,'Sheet','Sham m2 ROI 1','Range','A2');
+    writematrix(filtered_sham.f4,filename,'Sheet','Sham m2 ROI 2','Range','A2');
+    writematrix(filtered_sham.f5,filename,'Sheet','Sham m3 ROI 1','Range','A2');
+    writematrix(filtered_sham.f6,filename,'Sheet','Sham m3 ROI 2','Range','A2');
    
-    % titling A1 column for each sheet
+    % titling A1, B1, C1 column for each sheet
     A1title = {'plaque area (um^2)'};
+    B1title = {'X'};
+    C1title = {'Y'};
            
-    writecell(A1title,filename,'Sheet','Chikodi m1','Range','A1');
-    writecell(A1title,filename,'Sheet','Chikodi m2','Range','A1');
-    writecell(A1title,filename,'Sheet','Chikodi m3','Range','A1');
-    writecell(A1title,filename,'Sheet','Chikodi m4','Range','A1');
-    writecell(A1title,filename,'Sheet','Chikodi m5','Range','A1');
-    writecell(A1title,filename,'Sheet','Chikodi m6','Range','A1');
-    writecell(A1title,filename,'Sheet','Sham m1','Range','A1');
-    writecell(A1title,filename,'Sheet','Sham m2','Range','A1');
-    writecell(A1title,filename,'Sheet','Sham m3','Range','A1');
-    writecell(A1title,filename,'Sheet','Sham m4','Range','A1');
-    writecell(A1title,filename,'Sheet','Sham m5','Range','A1');
-    writecell(A1title,filename,'Sheet','Sham m6','Range','A1');
-else
+%     writecell(A1title,filename,'Sheet','Chikodi m1 ROI 1','Range','A1');
+%     writecell(A1title,filename,'Sheet','Chikodi m1 ROI 2','Range','A1');
+%     writecell(A1title,filename,'Sheet','Chikodi m2 ROI 1','Range','A1');
+%     writecell(A1title,filename,'Sheet','Chikodi m2 ROI 2','Range','A1');
+%     writecell(A1title,filename,'Sheet','Chikodi m3 ROI 1','Range','A1');
+%     writecell(A1title,filename,'Sheet','Chikodi m3 ROI 2','Range','A1');
+%     writecell(A1title,filename,'Sheet','Sham m1 ROI 1','Range','A1');
+%     writecell(A1title,filename,'Sheet','Sham m1 ROI 2','Range','A1');
+%     writecell(A1title,filename,'Sheet','Sham m2 ROI 1','Range','A1');
+%     writecell(A1title,filename,'Sheet','Sham m2 ROI 2','Range','A1');
+%     writecell(A1title,filename,'Sheet','Sham m3 ROI 1','Range','A1');
+%     writecell(A1title,filename,'Sheet','Sham m3 ROI 2','Range','A1');
+    
+sheetnames = {'Chikodi m1 ROI 1' 'Chikodi m1 ROI 2' 'Chikodi m2 ROI 1' 'Chikodi m2 ROI 2' 'Chikodi m3 ROI 1' 'Chikodi m3 ROI 2' 'Sham m1 ROI 1' 'Sham m1 ROI 2' 'Sham m2 ROI 1' 'Sham m2 ROI 2' 'Sham m3 ROI 1' 'Sham m3 ROI 2'} ;
+    for i = 1:12 
+        writecell(A1title,filename,'Sheet',sheetnames{i},'Range','A1');
+        writecell(B1title,filename,'Sheet',sheetnames{i},'Range','B1');
+        writecell(C1title,filename,'Sheet',sheetnames{i},'Range','C1');
+    end 
+    
+% summary page with MWs 
+    writematrix('Summary',filename,'Sheet','Summary','Range','A1');
+    writematrix('MW P-value',filename,'Sheet','Summary','Range','B1');
+    writematrix('ROI1',filename,'Sheet','Summary','Range','A2');
+    writematrix('ROI2',filename,'Sheet','Summary','Range','A3');
+    writematrix(MW_ROI1,filename,'Sheet','Summary','Range','B2');
+    writematrix(MW_ROI2,filename,'Sheet','Summary','Range','B3');
+    
+else % other series data 
    
     writematrix(filtered_bobm1,filename,'Sheet','Bobola m1','Range','A2');
     writematrix(filtered_bobm2,filename,'Sheet','Bobola m2','Range','A2');
@@ -199,7 +305,7 @@ else
     writematrix(filtered_shamm2,filename,'Sheet','Sham m2','Range','A2');
     writematrix(filtered_shamm3,filename,'Sheet','Sham m3','Range','A2');
    
-    % titling A1 column for each sheet
+    % titling A1, B1, C1 column for each sheet
     A1title = {'plaque area (um^2)'};
     writecell(A1title,filename,'Sheet','Bobola m1','Range','A1');
     writecell(A1title,filename,'Sheet','Bobola m2','Range','A1');
